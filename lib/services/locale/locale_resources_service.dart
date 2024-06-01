@@ -8,12 +8,15 @@ abstract class LocaleResourcesService {
   Future<void> setAccessToken(String token);
   Future<void> deleteAccessToken();
   Future<void> setEmail(String email);
+  Future<void> setUserId(String userId);
+  Future<Option<String>> getUserId();
   Future<Option<String>> getEmail();
   Future<void> deleteEmail();
   bool getRememberMe();
   Future<void> setRememberMe(bool value);
-
-  /// Clears all data from secure storage. Use with caution.
   Future<void> clearSecureStorage();
+  Future<void> deleteUserId();
+  Future<void> deleteRememberMe();
+
   Future<Option<String>> getEmployeeId();
 }

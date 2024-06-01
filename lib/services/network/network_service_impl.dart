@@ -102,10 +102,6 @@ final class NetworkServiceImpl implements NetworkService {
       if (await networkInfo.isConnected) {
         final result = await operation();
 
-        if (result.data?["status"] != 200) {
-          return left(Failure.responseError(result.data?["message"] as String? ?? unknownErrorMessage));
-        }
-
         return right(result);
       } else {
         return left(Failure.noConnection(noConnectionMessage));

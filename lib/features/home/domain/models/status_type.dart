@@ -1,28 +1,19 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/colors.dart';
 
-enum StatusType {
-  newStatus(1),
-  continues(2),
-  finished(3);
+class StatusType extends Equatable {
+  final int id;
+  final String title;
 
-  final int value;
+  const StatusType({
+    required this.id,
+    required this.title,
+  });
 
-  const StatusType(this.value);
-
-  static String name(int value) {
-    switch (value) {
-      case 1:
-        return "newStatus";
-      case 2:
-        return "continues";
-      case 3:
-        return "finished";
-      default:
-        return "newStatus";
-    }
-  }
+  @override
+  List<Object?> get props => [id, title];
 
   static IconData? icon(int value) {
     switch (value) {

@@ -7,9 +7,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../custom/custom_app_bar.dart';
-import '../../domain/models/status_type.dart';
 import '../../widgets/status_card.dart';
 import '../providers/home_provider.dart';
+import '../providers/status_type_provider.dart';
 
 @RoutePage()
 class HomePage extends ConsumerWidget {
@@ -20,6 +20,8 @@ class HomePage extends ConsumerWidget {
     context.locale;
 
     ref.watch(homeProvider);
+
+    final statusTypes = ref.watch(statusTypeProvider);
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -34,11 +36,22 @@ class HomePage extends ConsumerWidget {
           SizedBox(height: 4.h),
           const _Name(),
           SizedBox(height: 60.h),
-          const _New(),
-          SizedBox(height: 16.h),
-          const _Continues(),
-          SizedBox(height: 16.h),
-          const _Finished(),
+          ListView.separated(
+            itemCount: statusTypes.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            separatorBuilder: (context, index) => SizedBox(height: 16.h),
+            itemBuilder: (context, index) {
+              final statusType = statusTypes[index];
+
+              return StatusCard(statusType: statusType);
+            },
+          ),
+          // const _New(),
+          // SizedBox(height: 16.h),
+          // const _Continues(),
+          // SizedBox(height: 16.h),
+          // const _Finished(),
         ],
       ),
     );
@@ -80,29 +93,29 @@ class _Name extends StatelessWidget {
   }
 }
 
-class _New extends StatelessWidget {
-  const _New();
+// class _New extends StatelessWidget {
+//   const _New();
 
-  @override
-  Widget build(BuildContext context) {
-    return const StatusCard(statusType: StatusType.newStatus);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const StatusCard(statusType: StatusTypes.newStatus);
+//   }
+// }
 
-class _Continues extends StatelessWidget {
-  const _Continues();
+// class _Continues extends StatelessWidget {
+//   const _Continues();
 
-  @override
-  Widget build(BuildContext context) {
-    return const StatusCard(statusType: StatusType.continues);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const StatusCard(statusType: StatusTypes.continues);
+//   }
+// }
 
-class _Finished extends StatelessWidget {
-  const _Finished();
+// class _Finished extends StatelessWidget {
+//   const _Finished();
 
-  @override
-  Widget build(BuildContext context) {
-    return const StatusCard(statusType: StatusType.finished);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const StatusCard(statusType: StatusTypes.finished);
+//   }
+// }

@@ -53,4 +53,9 @@ final class FirebaseServiceImpl implements FirebaseService {
       return left(Failure.unknownError(e.toString()));
     }
   }
+
+  @override
+  Future<void> deleteAccount() async {
+    await firebaseAuth.currentUser!.delete();
+  }
 }

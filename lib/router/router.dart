@@ -3,12 +3,12 @@ import 'package:auto_route/auto_route.dart';
 import '../features/add_task/presentation/pages/add_task_page.dart';
 import '../features/auth/presentation/pages/login_page.dart';
 import '../features/auth/presentation/pages/register_page.dart';
+import '../features/bottom_bar/presentation/page/bottom_bar_widget.dart';
 import '../features/home/domain/models/status_type.dart';
 import '../features/home/presentation/pages/home_page.dart';
 import '../features/home/presentation/pages/tasks_list_page.dart';
 import '../features/profile/presentation/pages/profile_page.dart';
 import '../splash_page.dart';
-import '../theme/bottom_bar_widget.dart';
 
 part 'router.gr.dart';
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,6 +24,8 @@ class RegisterNotifier extends AutoDisposeNotifier<RegisterState> {
     state = state.copyWith(isLoading: true);
 
     final result = await ref.read(authRepositoryProvider).register(
+          name: state.name,
+          surname: state.surname,
           email: state.email,
           password: state.password,
         );
@@ -30,6 +33,20 @@ class RegisterNotifier extends AutoDisposeNotifier<RegisterState> {
     state = state.copyWith(
       isLoading: false,
       failure: result.fold((l) => some(l), (r) => none()),
+    );
+  }
+
+  void onNameChanged(String? value) {
+    state = state.copyWith(
+      name: value?.trim() ?? '',
+      nameFailure: validateEmptiness(value?.trim() ?? '', customMessage: "emptyNameFailureMessage".tr()),
+    );
+  }
+
+  void onSurnameChanged(String? value) {
+    state = state.copyWith(
+      surname: value?.trim() ?? '',
+      surnameFailure: validateEmptiness(value?.trim() ?? '', customMessage: "emptySurnameFailureMessage".tr()),
     );
   }
 
@@ -44,14 +61,14 @@ class RegisterNotifier extends AutoDisposeNotifier<RegisterState> {
     state = state.copyWith(
       password: value ?? "",
       passwordFailure: validatePassword(value ?? ""),
-      passwordAgainFailure: validatePasswordAgain(state.passwordAgain, value ?? ""),
+      passwordAgainFailure: validateConfirmPassword(state.passwordAgain, value ?? ""),
     );
   }
 
   void onPasswordAgainChanged(String? value) {
     state = state.copyWith(
       passwordAgain: value ?? "",
-      passwordAgainFailure: validatePasswordAgain(value ?? "", state.password),
+      passwordAgainFailure: validateConfirmPassword(value ?? "", state.password),
     );
   }
 

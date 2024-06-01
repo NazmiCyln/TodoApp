@@ -12,9 +12,13 @@ class RegisterState with _$RegisterState {
   const factory RegisterState({
     required Option<Failure> failure,
     required bool isLoading,
+    required String name,
+    required String surname,
     required String email,
     required String password,
     required String passwordAgain,
+    required Option<ValueFailure> nameFailure,
+    required Option<ValueFailure> surnameFailure,
     required Option<ValueFailure> emailFailure,
     required Option<ValueFailure> passwordFailure,
     required Option<ValueFailure> passwordAgainFailure,
@@ -25,17 +29,17 @@ class RegisterState with _$RegisterState {
     return RegisterState(
       failure: none(),
       isLoading: false,
+      name: '',
+      surname: '',
       email: '',
       password: '',
       passwordAgain: '',
+      nameFailure: none(),
+      surnameFailure: none(),
       emailFailure: none(),
       passwordFailure: none(),
       passwordAgainFailure: none(),
       validationErrorVisibility: const ValidationErrorVisibility.hide(),
     );
   }
-
-  const RegisterState._();
-
-  bool get isValid => emailFailure.isNone() && passwordFailure.isNone() && passwordAgainFailure.isNone();
 }

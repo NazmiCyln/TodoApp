@@ -37,7 +37,7 @@ class StatusCard extends StatelessWidget {
           child: ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
             title: Text(
-              statusType.name.tr(),
+              statusType.title.tr(),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: darkBlue,
                   ),
@@ -46,12 +46,12 @@ class StatusCard extends StatelessWidget {
               height: 40.r,
               width: 40.r,
               decoration: BoxDecoration(
-                color: StatusType.color(statusType.value),
+                color: StatusType.color(statusType.id),
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: Center(
                 child: Icon(
-                  StatusType.icon(statusType.value),
+                  StatusType.icon(statusType.id),
                   size: 20.r,
                   color: white,
                 ),

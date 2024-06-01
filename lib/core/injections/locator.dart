@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:injectable/injectable.dart';
 import '../../features/auth/domain/repositories/auth_repository.dart';
+import '../../features/home/domain/repositories/home_repository.dart';
 import '../../features/profile/domain/repositories/profile_repository.dart';
 import '../../router/router.dart';
 import '../../services/locale/locale_resources_service.dart';
@@ -19,3 +20,5 @@ final localeResourcesServiceProvider = Provider.autoDispose((ref) => getIt<Local
 final authRepositoryProvider = Provider.autoDispose((ref) => getIt<AuthRepository>());
 
 final profileRepositoryProvider = Provider.autoDispose((ref) => getIt<ProfileRepository>());
+
+final homeRepositoryProvider = Provider.autoDispose((ref) => getIt<HomeRepository>());

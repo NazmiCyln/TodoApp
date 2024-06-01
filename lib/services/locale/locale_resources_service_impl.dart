@@ -79,6 +79,22 @@ final class LocaleResourcesServiceImpl implements LocaleResourcesService {
       },
     );
   }
+
+  @override
+  Future<void> setUserId(String userId) async => sharedPreferences.setString(_Keys.userId, userId);
+
+  @override
+  Future<Option<String>> getUserId() async {
+    final userId = sharedPreferences.getString(_Keys.userId);
+
+    return optionOf(userId);
+  }
+
+  @override
+  Future<void> deleteRememberMe() async => sharedPreferences.remove(_Keys.rememberMe);
+
+  @override
+  Future<void> deleteUserId() async => sharedPreferences.remove(_Keys.userId);
 }
 
 abstract final class _Keys {
@@ -86,4 +102,5 @@ abstract final class _Keys {
   static const String accessToken = "accessToken";
   static const String email = "email";
   static const String rememberMe = "rememberMe";
+  static const String userId = "userId";
 }

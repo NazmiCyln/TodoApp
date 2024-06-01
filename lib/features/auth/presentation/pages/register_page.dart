@@ -10,6 +10,7 @@ import '../../../../constants/colors.dart';
 import '../../../../custom/custom_app_bar.dart';
 import '../../../../custom/custom_dialog.dart';
 import '../../../../custom/custom_text_field.dart';
+import '../../../../custom/input_field.dart';
 import '../../../../custom/password_text_field.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../utils/input_formatters.dart';
@@ -56,6 +57,10 @@ class RegisterPage extends ConsumerWidget {
                         SizedBox(height: 24.h),
                         const _AppIconAndText(),
                         SizedBox(height: 40.h),
+                        const _Name(),
+                        SizedBox(height: 16.h),
+                        const _Surname(),
+                        SizedBox(height: 16.h),
                         const _Email(),
                         SizedBox(height: 16.h),
                         const _Password(),
@@ -103,6 +108,48 @@ class _AppIconAndText extends StatelessWidget {
   }
 }
 
+class _Name extends ConsumerWidget {
+  const _Name();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(registerProvider.notifier);
+
+    return InputField(
+      title: "name".tr(),
+      widget: CustomTextField(
+        hintText: "enterName".tr(),
+        inputFormatters: fullNameInputFormatters(),
+        validator: (value) => ref.read(registerProvider.select((value) => value.nameFailure)).toNullable()?.message,
+        onChanged: notifier.onNameChanged,
+        onFieldSubmitted: notifier.onNameChanged,
+        onSaved: notifier.onNameChanged,
+      ),
+    );
+  }
+}
+
+class _Surname extends ConsumerWidget {
+  const _Surname();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(registerProvider.notifier);
+
+    return InputField(
+      title: "surname".tr(),
+      widget: CustomTextField(
+        hintText: "enterSurname".tr(),
+        inputFormatters: fullNameInputFormatters(),
+        validator: (value) => ref.read(registerProvider.select((value) => value.surnameFailure)).toNullable()?.message,
+        onChanged: notifier.onSurnameChanged,
+        onFieldSubmitted: notifier.onSurnameChanged,
+        onSaved: notifier.onSurnameChanged,
+      ),
+    );
+  }
+}
+
 class _Email extends ConsumerWidget {
   const _Email();
 
@@ -110,14 +157,17 @@ class _Email extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(registerProvider.notifier);
 
-    return CustomTextField(
-      labelText: 'email'.tr(),
-      textInputType: TextInputType.emailAddress,
-      inputFormatters: eMailInputFormatters(),
-      validator: (value) => ref.read(registerProvider.select((value) => value.emailFailure)).toNullable()?.message,
-      onChanged: notifier.onEmailChanged,
-      onFieldSubmitted: notifier.onEmailChanged,
-      onSaved: notifier.onEmailChanged,
+    return InputField(
+      title: 'email'.tr(),
+      widget: CustomTextField(
+        hintText: 'enterEmail'.tr(),
+        textInputType: TextInputType.emailAddress,
+        inputFormatters: eMailInputFormatters(),
+        validator: (value) => ref.read(registerProvider.select((value) => value.emailFailure)).toNullable()?.message,
+        onChanged: notifier.onEmailChanged,
+        onFieldSubmitted: notifier.onEmailChanged,
+        onSaved: notifier.onEmailChanged,
+      ),
     );
   }
 }
@@ -129,12 +179,15 @@ class _Password extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(registerProvider.notifier);
 
-    return PasswordTextField(
-      labelText: 'password'.tr(),
-      validator: (value) => ref.read(registerProvider.select((value) => value.passwordFailure)).toNullable()?.message,
-      onChanged: notifier.onPasswordChanged,
-      onFieldSubmitted: notifier.onPasswordChanged,
-      onSaved: notifier.onPasswordChanged,
+    return InputField(
+      title: 'password'.tr(),
+      widget: PasswordTextField(
+        hintText: '********',
+        validator: (value) => ref.read(registerProvider.select((value) => value.passwordFailure)).toNullable()?.message,
+        onChanged: notifier.onPasswordChanged,
+        onFieldSubmitted: notifier.onPasswordChanged,
+        onSaved: notifier.onPasswordChanged,
+      ),
     );
   }
 }
@@ -146,14 +199,17 @@ class _PasswordAgain extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(registerProvider.notifier);
 
-    return PasswordTextField(
-      labelText: 'passwordAgain'.tr(),
-      textInputAction: TextInputAction.done,
-      validator: (value) =>
-          ref.read(registerProvider.select((value) => value.passwordAgainFailure)).toNullable()?.message,
-      onChanged: notifier.onPasswordAgainChanged,
-      onFieldSubmitted: notifier.onPasswordAgainChanged,
-      onSaved: notifier.onPasswordAgainChanged,
+    return InputField(
+      title: 'passwordAgain'.tr(),
+      widget: PasswordTextField(
+        hintText: '********',
+        textInputAction: TextInputAction.done,
+        validator: (value) =>
+            ref.read(registerProvider.select((value) => value.passwordAgainFailure)).toNullable()?.message,
+        onChanged: notifier.onPasswordAgainChanged,
+        onFieldSubmitted: notifier.onPasswordAgainChanged,
+        onSaved: notifier.onPasswordAgainChanged,
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/constants/api_endpoints.dart';
 
 import '../../env.dart';
 import '../../router/router.dart';
@@ -29,8 +30,9 @@ abstract class RegisterModule {
   @lazySingleton
   Dio get dio => Dio(
         BaseOptions(
+          baseUrl: Endpoints.baseUrl,
           headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
+            'content-type': 'application/json',
             "x-hasura-admin-secret": Env.secretKey,
           },
         ),

@@ -11,6 +11,7 @@ import 'package:todo_app/router/router.dart';
 
 import '../../../../common/loading_overlay.dart';
 import '../../../../constants/colors.dart';
+import '../../../../custom/input_field.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../utils/input_formatters.dart';
 import '../providers/login_provider.dart';
@@ -114,14 +115,17 @@ class _Email extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(loginProvider.notifier);
 
-    return CustomTextField(
-      labelText: 'email'.tr(),
-      textInputType: TextInputType.emailAddress,
-      inputFormatters: eMailInputFormatters(),
-      validator: (value) => ref.read(loginProvider.select((value) => value.emailFailure)).toNullable()?.message,
-      onChanged: notifier.onEmailChanged,
-      onFieldSubmitted: notifier.onEmailChanged,
-      onSaved: notifier.onEmailChanged,
+    return InputField(
+      title: 'email'.tr(),
+      widget: CustomTextField(
+        hintText: 'enterEmail'.tr(),
+        textInputType: TextInputType.emailAddress,
+        inputFormatters: eMailInputFormatters(),
+        validator: (value) => ref.read(loginProvider.select((value) => value.emailFailure)).toNullable()?.message,
+        onChanged: notifier.onEmailChanged,
+        onFieldSubmitted: notifier.onEmailChanged,
+        onSaved: notifier.onEmailChanged,
+      ),
     );
   }
 }
@@ -133,13 +137,16 @@ class _Password extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(loginProvider.notifier);
 
-    return PasswordTextField(
-      labelText: 'password'.tr(),
-      textInputAction: TextInputAction.done,
-      validator: (value) => ref.read(loginProvider.select((value) => value.passwordFailure)).toNullable()?.message,
-      onChanged: notifier.onPasswordChanged,
-      onFieldSubmitted: notifier.onPasswordChanged,
-      onSaved: notifier.onPasswordChanged,
+    return InputField(
+      title: 'password'.tr(),
+      widget: PasswordTextField(
+        hintText: '********',
+        textInputAction: TextInputAction.done,
+        validator: (value) => ref.read(loginProvider.select((value) => value.passwordFailure)).toNullable()?.message,
+        onChanged: notifier.onPasswordChanged,
+        onFieldSubmitted: notifier.onPasswordChanged,
+        onSaved: notifier.onPasswordChanged,
+      ),
     );
   }
 }

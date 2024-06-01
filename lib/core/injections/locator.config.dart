@@ -21,6 +21,9 @@ import 'package:shared_preferences/shared_preferences.dart' as _i6;
 import '../../features/auth/data/repositories/auth_repository_impl.dart'
     as _i25;
 import '../../features/auth/domain/repositories/auth_repository.dart' as _i24;
+import '../../features/home/data/repositories/home_repository_impl.dart'
+    as _i27;
+import '../../features/home/domain/repositories/home_repository.dart' as _i26;
 import '../../features/profile/data/repositories/profile_repository_impl.dart'
     as _i17;
 import '../../features/profile/domain/repositories/profile_repository.dart'
@@ -38,7 +41,7 @@ import '../../services/network/network_service.dart' as _i22;
 import '../../services/network/network_service_impl.dart' as _i23;
 import '../models/usecases/base_64_encode.dart' as _i15;
 import '../models/usecases/usecase.dart' as _i13;
-import 'register_module.dart' as _i26;
+import 'register_module.dart' as _i28;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -86,12 +89,15 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i24.AuthRepository>(() => _i25.AuthRepositoryImpl(
           localeResourcesService: gh<_i3.LocaleResourcesService>(),
           firebaseService: gh<_i20.FirebaseService>(),
+          networkService: gh<_i22.NetworkService>(),
         ));
+    gh.lazySingleton<_i26.HomeRepository>(() =>
+        _i27.HomeRepositoryImpl(networkService: gh<_i22.NetworkService>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i26.RegisterModule {
+class _$RegisterModule extends _i28.RegisterModule {
   @override
   _i7.AppRouter get appRouter => _i7.AppRouter();
 

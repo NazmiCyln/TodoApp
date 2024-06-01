@@ -11,6 +11,8 @@ final class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<void> logOut() async {
-    await localeResourcesService.clearSecureStorage();
+    await localeResourcesService.deleteRememberMe();
+    await localeResourcesService.deleteEmail();
+    await localeResourcesService.deleteUserId();
   }
 }

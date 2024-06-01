@@ -10,4 +10,6 @@ abstract interface class FirebaseService {
   });
 
   Future<Either<Failure, User>> registerWithEmailAndPassword({required String email, required String password});
+
+  Future<void> deleteAccount();
 }
