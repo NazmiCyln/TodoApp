@@ -13,4 +13,5 @@ analyzer:
     - "lib/core/injections/locator.config.dart"
 
   errors:
+    avoid_classes_with_only_static_members: ignore
     invalid_annotation_target: ignore
