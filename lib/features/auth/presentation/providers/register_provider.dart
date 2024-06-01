@@ -1,5 +1,7 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/injections/locator.dart';
 import '../../../../core/models/validation_error_visibility/validation_error_visibility.dart';
 import '../../../../utils/validators.dart';
 import '../states/register_state/register_state.dart';
@@ -17,7 +19,19 @@ class RegisterNotifier extends AutoDisposeNotifier<RegisterState> {
 
   Future<void> _init() async {}
 
-  Future<void> register() async {}
+  Future<void> register() async {
+    state = state.copyWith(isLoading: true);
+
+    final result = await ref.read(authRepositoryProvider).register(
+          email: state.email,
+          password: state.password,
+        );
+
+    state = state.copyWith(
+      isLoading: false,
+      failure: result.fold((l) => some(l), (r) => none()),
+    );
+  }
 
   void onEmailChanged(String? value) {
     state = state.copyWith(

@@ -14,7 +14,7 @@ abstract final class CustomFilledButton extends StatelessWidget {
   final FocusNode? focusNode;
   final bool autofocus;
   final Clip clipBehavior;
-  final MaterialStatesController? statesController;
+  final WidgetStatesController? statesController;
   final _Type type;
 
   const CustomFilledButton({
@@ -41,7 +41,7 @@ abstract final class CustomFilledButton extends StatelessWidget {
     FocusNode? focusNode,
     bool autofocus,
     Clip clipBehavior,
-    MaterialStatesController? statesController,
+    WidgetStatesController? statesController,
   }) = _GrayButton;
 
   const factory CustomFilledButton.green({
@@ -54,7 +54,7 @@ abstract final class CustomFilledButton extends StatelessWidget {
     FocusNode? focusNode,
     bool autofocus,
     Clip clipBehavior,
-    MaterialStatesController? statesController,
+    WidgetStatesController? statesController,
   }) = _GreenButton;
 
   // const factory CustomDialog.success({
@@ -79,9 +79,9 @@ final class _GreenButton extends CustomFilledButton {
     return FilledButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+        backgroundColor: WidgetStateProperty.resolveWith<Color>(
           (states) {
-            if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.disabled)) {
               return gray;
             } else {
               return green;
@@ -120,18 +120,18 @@ final class _GrayButton extends CustomFilledButton {
     return FilledButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+        foregroundColor: WidgetStateProperty.resolveWith<Color>(
           (states) {
-            if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.disabled)) {
               return darkBlue;
             } else {
               return darkBlue;
             }
           },
         ),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+        backgroundColor: WidgetStateProperty.resolveWith<Color>(
           (states) {
-            if (states.contains(MaterialState.disabled)) {
+            if (states.contains(WidgetState.disabled)) {
               return gray;
             } else {
               return gray;

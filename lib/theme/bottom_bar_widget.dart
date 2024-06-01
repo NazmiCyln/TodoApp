@@ -35,7 +35,7 @@ class BottomBarWidget extends ConsumerWidget {
           secondaryButtonText: "no".tr(),
           primaryButtonText: "yes".tr(),
           onPrimaryButtonPressed: () => SystemNavigator.pop(),
-          onSecondaryButtonPressed: () => context.router.pop(),
+          onSecondaryButtonPressed: () => context.router.maybePop(),
         ).show(context);
       },
       child: AutoTabsScaffold(

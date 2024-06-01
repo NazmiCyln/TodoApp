@@ -148,7 +148,7 @@ class _LogOut extends ConsumerWidget {
             ref.read(profileProvider.notifier).logOut();
             context.router.replaceAll([const LoginRoute()]);
           },
-          onSecondaryButtonPressed: () => context.router.pop(),
+          onSecondaryButtonPressed: () => context.router.maybePop(),
           primaryButtonText: "yes".tr(),
           secondaryButtonText: "close".tr(),
         ).show(context);

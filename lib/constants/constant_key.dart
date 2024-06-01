@@ -1,1 +1,0 @@
-const adminSecretKey = "jErxrtISjdct2nKSlWeeV5Yqt86q3bwLnCnXtQ5tF1t9NgP32inneq0ApwHPCj0b";

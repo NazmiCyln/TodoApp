@@ -92,7 +92,7 @@ final class _FailureDialog extends CustomDialog {
   @override
   Widget build(BuildContext context) {
     return _SimpleDialog(
-      onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.popRoute,
+      onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.maybePop,
       onSecondaryButtonPressed: onSecondaryButtonPressed,
       title: title ?? "actionFailed".tr(),
       subtitle: subtitle,
@@ -116,7 +116,7 @@ final class _SuccessDialog extends CustomDialog {
   @override
   Widget build(BuildContext context) {
     return _SimpleDialog(
-      onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.popRoute,
+      onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.maybePop,
       onSecondaryButtonPressed: onSecondaryButtonPressed,
       title: title ?? "actionCompleted".tr(),
       subtitle: subtitle,
@@ -140,7 +140,7 @@ final class _WarningDialog extends CustomDialog {
   @override
   Widget build(BuildContext context) {
     return _SimpleDialog(
-      onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.popRoute,
+      onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.maybePop,
       onSecondaryButtonPressed: onSecondaryButtonPressed,
       title: title ?? "areYouSure".tr(),
       subtitle: subtitle,
@@ -230,7 +230,7 @@ class _CloseIcon extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: IconButton(
-        onPressed: context.popRoute,
+        onPressed: context.maybePop,
         icon: Icon(
           Icons.close,
           color: darkBlue.withOpacity(.6),

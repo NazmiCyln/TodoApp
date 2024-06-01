@@ -225,7 +225,7 @@ class _LoginButton extends ConsumerWidget {
       final state = ref.read(loginProvider);
 
       state.failure.fold(
-        () => context.pushRoute(const BottomBarRoute()),
+        () => context.replaceRoute(const BottomBarRoute()),
         (t) => CustomDialog.failure(title: t.message).show(context),
       );
     }

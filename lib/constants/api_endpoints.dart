@@ -3,5 +3,7 @@
 abstract final class Endpoints {
   static const baseUrl = "https://hardy-crane-66.hasura.app/api/rest/";
 
+  static const createUser = "createUser";
+
   static const getStatusType = "getStatusType";
 }

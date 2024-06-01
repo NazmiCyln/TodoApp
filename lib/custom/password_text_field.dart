@@ -92,24 +92,15 @@ class PasswordTextField extends HookWidget {
     }
 
     return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16.w,
-          vertical: 18.h,
-        ),
-        child: Icon(
-          image,
-          color: isDisabled ? gray : labelColor,
-          size: 24.r,
-        )
-        // child: image.svg(
-        //   height: context.responsive(24.r, sm: 36.r),
-        //   width: context.responsive(24.r, sm: 36.r),
-        //   fit: BoxFit.scaleDown,
-        //   colorFilter: ColorFilter.mode(
-        //     isDisabled ? gray : labelColor,
-        //     BlendMode.srcIn,
-        //   ),
-        // ),
-        );
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 18.h,
+      ),
+      child: Icon(
+        image,
+        color: isDisabled ? gray : labelColor,
+        size: 24.r,
+      ),
+    );
   }
 }

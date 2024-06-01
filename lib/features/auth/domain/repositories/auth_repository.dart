@@ -9,5 +9,10 @@ abstract interface class AuthRepository {
     required bool rememberMe,
   });
 
+  Future<Either<Failure, String>> register({
+    required String email,
+    required String password,
+  });
+
   Future<bool> isRememberMe();
 }

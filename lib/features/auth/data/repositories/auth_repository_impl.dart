@@ -3,13 +3,18 @@ import 'package:injectable/injectable.dart';
 import 'package:todo_app/features/auth/domain/repositories/auth_repository.dart';
 
 import '../../../../core/models/failure/failure.dart';
+import '../../../../services/firebase/firebase_service.dart';
 import '../../../../services/locale/locale_resources_service.dart';
 
 @LazySingleton(as: AuthRepository)
 final class AuthRepositoryImpl implements AuthRepository {
   final LocaleResourcesService localeResourcesService;
+  final FirebaseService firebaseService;
 
-  AuthRepositoryImpl({required this.localeResourcesService});
+  AuthRepositoryImpl({
+    required this.localeResourcesService,
+    required this.firebaseService,
+  });
 
   @override
   Future<Either<Failure, String>> login({
@@ -21,6 +26,16 @@ final class AuthRepositoryImpl implements AuthRepository {
     await localeResourcesService.setRememberMe(rememberMe);
 
     return right("Success");
+  }
+
+  @override
+  Future<Either<Failure, String>> register({required String email, required String password}) async {
+    final result = await firebaseService.registerWithEmailAndPassword(email: email, password: password);
+
+    return result.fold(
+      left,
+      (user) => right("Success"),
+    );
   }
 
   @override

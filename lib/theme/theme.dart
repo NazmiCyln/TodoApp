@@ -40,40 +40,40 @@ final theme = ThemeData(
 
 final _outLinedButtonThemeData = OutlinedButtonThemeData(
   style: ButtonStyle(
-    minimumSize: MaterialStatePropertyAll(Size.fromHeight(50.r)),
-    backgroundColor: const MaterialStatePropertyAll(backgroundColor),
-    shape: MaterialStatePropertyAll(
+    minimumSize: WidgetStatePropertyAll(Size.fromHeight(50.r)),
+    backgroundColor: const WidgetStatePropertyAll(backgroundColor),
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
     ),
-    side: MaterialStatePropertyAll(
+    side: WidgetStatePropertyAll(
       BorderSide(color: primary, width: 1.r),
     ),
-    textStyle: MaterialStatePropertyAll(titleSmall.copyWith(color: primary)),
-    foregroundColor: const MaterialStatePropertyAll(primary),
-    padding: MaterialStatePropertyAll(EdgeInsets.all(2.r)),
+    textStyle: WidgetStatePropertyAll(titleSmall.copyWith(color: primary)),
+    foregroundColor: const WidgetStatePropertyAll(primary),
+    padding: WidgetStatePropertyAll(EdgeInsets.all(2.r)),
   ),
 );
 
 final _filledButtomThemeData = FilledButtonThemeData(
   style: ButtonStyle(
-    minimumSize: MaterialStatePropertyAll(Size.fromHeight(56.r)),
-    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+    minimumSize: WidgetStatePropertyAll(Size.fromHeight(56.r)),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>(
       (states) {
-        if (states.contains(MaterialState.disabled)) {
+        if (states.contains(WidgetState.disabled)) {
           return gray;
         } else {
           return primary;
         }
       },
     ),
-    side: const MaterialStatePropertyAll(BorderSide.none),
-    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-    shape: MaterialStatePropertyAll(
+    side: const WidgetStatePropertyAll(BorderSide.none),
+    padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+    shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.r)),
     ),
-    textStyle: MaterialStatePropertyAll(titleSmall),
-    foregroundColor: const MaterialStatePropertyAll(white),
-    elevation: const MaterialStatePropertyAll(0),
+    textStyle: WidgetStatePropertyAll(titleSmall),
+    foregroundColor: const WidgetStatePropertyAll(white),
+    elevation: const WidgetStatePropertyAll(0),
   ),
 );
 
@@ -155,17 +155,17 @@ final _inputDecorationTheme = InputDecorationTheme(
 final _textButtonThemeData = TextButtonThemeData(
   style: ButtonStyle(
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    foregroundColor: const MaterialStatePropertyAll(primary),
-    backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
-    overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-    textStyle: MaterialStatePropertyAll(bodySmall.copyWith(color: primary, decoration: TextDecoration.underline)),
+    foregroundColor: const WidgetStatePropertyAll(primary),
+    backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+    overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+    padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+    textStyle: WidgetStatePropertyAll(bodySmall.copyWith(color: primary, decoration: TextDecoration.underline)),
   ),
 );
 
 final _actionIconThemeData = ActionIconThemeData(
   backButtonIconBuilder: (context) => IconButton(
-    onPressed: context.router.pop,
+    onPressed: context.router.maybePop,
     // style: _iconButtonStyle,
     icon: Icon(Icons.arrow_back_ios_rounded, color: darkBlue, size: 24.r),
   ),
@@ -174,9 +174,9 @@ final _actionIconThemeData = ActionIconThemeData(
 const _iconButtonThemeData = IconButtonThemeData(style: _iconButtonStyle);
 
 const _iconButtonStyle = ButtonStyle(
-  foregroundColor: MaterialStatePropertyAll(darkBlue),
-  iconColor: MaterialStatePropertyAll(darkBlue),
-  padding: MaterialStatePropertyAll(EdgeInsets.zero),
+  foregroundColor: WidgetStatePropertyAll(darkBlue),
+  iconColor: WidgetStatePropertyAll(darkBlue),
+  padding: WidgetStatePropertyAll(EdgeInsets.zero),
 );
 
 final _dialogTheme = DialogTheme(
@@ -206,22 +206,22 @@ final _listTileThemeData = ListTileThemeData(
 
 final _checkboxThemeData = CheckboxThemeData(
   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-  checkColor: const MaterialStatePropertyAll(white),
+  checkColor: const WidgetStatePropertyAll(white),
   shape: RoundedRectangleBorder(
     side: BorderSide(color: primary, width: 1.5.r),
     borderRadius: BorderRadius.circular(4.r),
   ),
   side: BorderSide(color: primary, width: 1.5.r),
-  fillColor: MaterialStateProperty.resolveWith((states) {
-    if (states.contains(MaterialState.selected)) return primary;
+  fillColor: WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.selected)) return primary;
     return null;
   }),
 );
 
 final _radioThemeData = RadioThemeData(
   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-  fillColor: MaterialStateProperty.resolveWith((states) {
-    if (states.contains(MaterialState.selected)) return primary;
+  fillColor: WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.selected)) return primary;
     return gray;
   }),
 );

@@ -190,7 +190,7 @@ class _RegisterButton extends ConsumerWidget {
           subtitle: "registerSuccessMessage".tr(),
           onPrimaryButtonPressed: () => context.router.replaceAll(const [LoginRoute()]),
         ).show(context),
-        (t) => CustomDialog.failure(title: t.message).show(context),
+        (t) => CustomDialog.failure(subtitle: t.message).show(context),
       );
     }
   }
