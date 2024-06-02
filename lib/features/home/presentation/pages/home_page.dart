@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../custom/custom_app_bar.dart';
+import '../../../auth/presentation/providers/user_provider.dart';
 import '../../widgets/status_card.dart';
 import '../providers/home_provider.dart';
 import '../providers/status_type_provider.dart';
@@ -47,11 +48,6 @@ class HomePage extends ConsumerWidget {
               return StatusCard(statusType: statusType);
             },
           ),
-          // const _New(),
-          // SizedBox(height: 16.h),
-          // const _Continues(),
-          // SizedBox(height: 16.h),
-          // const _Finished(),
         ],
       ),
     );
@@ -76,15 +72,17 @@ class _Welcome extends StatelessWidget {
   }
 }
 
-class _Name extends StatelessWidget {
+class _Name extends ConsumerWidget {
   const _Name();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Text(
-        "Nazmi Ceylan",
+        '${user.name} ${user.surname}',
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: textColor,
             ),
@@ -92,30 +90,3 @@ class _Name extends StatelessWidget {
     );
   }
 }
-
-// class _New extends StatelessWidget {
-//   const _New();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const StatusCard(statusType: StatusTypes.newStatus);
-//   }
-// }
-
-// class _Continues extends StatelessWidget {
-//   const _Continues();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const StatusCard(statusType: StatusTypes.continues);
-//   }
-// }
-
-// class _Finished extends StatelessWidget {
-//   const _Finished();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const StatusCard(statusType: StatusTypes.finished);
-//   }
-// }

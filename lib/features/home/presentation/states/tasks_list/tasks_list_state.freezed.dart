@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TasksListState {
   Option<Failure> get failure => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  List<Tasks> get tasksList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TasksListStateCopyWith<TasksListState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $TasksListStateCopyWith<$Res> {
           TasksListState value, $Res Function(TasksListState) then) =
       _$TasksListStateCopyWithImpl<$Res, TasksListState>;
   @useResult
-  $Res call({Option<Failure> failure, bool isLoading});
+  $Res call({Option<Failure> failure, bool isLoading, List<Tasks> tasksList});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$TasksListStateCopyWithImpl<$Res, $Val extends TasksListState>
   $Res call({
     Object? failure = null,
     Object? isLoading = null,
+    Object? tasksList = null,
   }) {
     return _then(_value.copyWith(
       failure: null == failure
@@ -58,6 +60,10 @@ class _$TasksListStateCopyWithImpl<$Res, $Val extends TasksListState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      tasksList: null == tasksList
+          ? _value.tasksList
+          : tasksList // ignore: cast_nullable_to_non_nullable
+              as List<Tasks>,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$TasksListStateImplCopyWith<$Res>
       __$$TasksListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Option<Failure> failure, bool isLoading});
+  $Res call({Option<Failure> failure, bool isLoading, List<Tasks> tasksList});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$TasksListStateImplCopyWithImpl<$Res>
   $Res call({
     Object? failure = null,
     Object? isLoading = null,
+    Object? tasksList = null,
   }) {
     return _then(_$TasksListStateImpl(
       failure: null == failure
@@ -96,6 +103,10 @@ class __$$TasksListStateImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      tasksList: null == tasksList
+          ? _value._tasksList
+          : tasksList // ignore: cast_nullable_to_non_nullable
+              as List<Tasks>,
     ));
   }
 }
@@ -103,16 +114,27 @@ class __$$TasksListStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TasksListStateImpl implements _TasksListState {
-  const _$TasksListStateImpl({required this.failure, required this.isLoading});
+  const _$TasksListStateImpl(
+      {required this.failure,
+      required this.isLoading,
+      required final List<Tasks> tasksList})
+      : _tasksList = tasksList;
 
   @override
   final Option<Failure> failure;
   @override
   final bool isLoading;
+  final List<Tasks> _tasksList;
+  @override
+  List<Tasks> get tasksList {
+    if (_tasksList is EqualUnmodifiableListView) return _tasksList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasksList);
+  }
 
   @override
   String toString() {
-    return 'TasksListState(failure: $failure, isLoading: $isLoading)';
+    return 'TasksListState(failure: $failure, isLoading: $isLoading, tasksList: $tasksList)';
   }
 
   @override
@@ -122,11 +144,14 @@ class _$TasksListStateImpl implements _TasksListState {
             other is _$TasksListStateImpl &&
             (identical(other.failure, failure) || other.failure == failure) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._tasksList, _tasksList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failure, isLoading);
+  int get hashCode => Object.hash(runtimeType, failure, isLoading,
+      const DeepCollectionEquality().hash(_tasksList));
 
   @JsonKey(ignore: true)
   @override
@@ -139,12 +164,15 @@ class _$TasksListStateImpl implements _TasksListState {
 abstract class _TasksListState implements TasksListState {
   const factory _TasksListState(
       {required final Option<Failure> failure,
-      required final bool isLoading}) = _$TasksListStateImpl;
+      required final bool isLoading,
+      required final List<Tasks> tasksList}) = _$TasksListStateImpl;
 
   @override
   Option<Failure> get failure;
   @override
   bool get isLoading;
+  @override
+  List<Tasks> get tasksList;
   @override
   @JsonKey(ignore: true)
   _$$TasksListStateImplCopyWith<_$TasksListStateImpl> get copyWith =>

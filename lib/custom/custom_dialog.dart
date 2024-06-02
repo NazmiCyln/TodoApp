@@ -14,6 +14,7 @@ enum _Type { success, failure, warning }
 abstract final class CustomDialog extends StatelessWidget {
   final VoidCallback? onPrimaryButtonPressed;
   final VoidCallback? onSecondaryButtonPressed;
+  final VoidCallback? onClosedPressed;
   final String? secondaryButtonText;
   final String? title;
   final String? subtitle;
@@ -27,6 +28,7 @@ abstract final class CustomDialog extends StatelessWidget {
     this.secondaryButtonText,
     this.onPrimaryButtonPressed,
     this.onSecondaryButtonPressed,
+    this.onClosedPressed,
     this.title,
   });
 
@@ -34,6 +36,7 @@ abstract final class CustomDialog extends StatelessWidget {
     String? subtitle,
     VoidCallback? onPrimaryButtonPressed,
     VoidCallback? onSecondaryButtonPressed,
+    VoidCallback? onClosedPressed,
 
     /// Defaults to `error.tr()`.
     String? title,
@@ -47,6 +50,7 @@ abstract final class CustomDialog extends StatelessWidget {
     String? subtitle,
     VoidCallback? onPrimaryButtonPressed,
     VoidCallback? onSecondaryButtonPressed,
+    VoidCallback? onClosedPressed,
 
     /// Defaults to `success.tr()`.
     String? title,
@@ -60,6 +64,7 @@ abstract final class CustomDialog extends StatelessWidget {
     String? subtitle,
     VoidCallback? onPrimaryButtonPressed,
     VoidCallback? onSecondaryButtonPressed,
+    VoidCallback? onClosedPressed,
 
     /// Defaults to `warning.tr()`.
     String? title,
@@ -84,6 +89,7 @@ final class _FailureDialog extends CustomDialog {
     super.subtitle,
     super.onPrimaryButtonPressed,
     super.onSecondaryButtonPressed,
+    super.onClosedPressed,
     super.title,
     super.primaryButtonText,
     super.secondaryButtonText,
@@ -94,6 +100,7 @@ final class _FailureDialog extends CustomDialog {
     return _SimpleDialog(
       onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.maybePop,
       onSecondaryButtonPressed: onSecondaryButtonPressed,
+      onClosedPressed: onClosedPressed,
       title: title ?? "actionFailed".tr(),
       subtitle: subtitle,
       primaryButtonText: primaryButtonText ?? 'tryAgain'.tr(),
@@ -108,6 +115,7 @@ final class _SuccessDialog extends CustomDialog {
     super.subtitle,
     super.onPrimaryButtonPressed,
     super.onSecondaryButtonPressed,
+    super.onClosedPressed,
     super.title,
     super.primaryButtonText,
     super.secondaryButtonText,
@@ -118,6 +126,7 @@ final class _SuccessDialog extends CustomDialog {
     return _SimpleDialog(
       onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.maybePop,
       onSecondaryButtonPressed: onSecondaryButtonPressed,
+      onClosedPressed: onClosedPressed,
       title: title ?? "actionCompleted".tr(),
       subtitle: subtitle,
       primaryButtonText: primaryButtonText ?? 'ok'.tr(),
@@ -132,6 +141,7 @@ final class _WarningDialog extends CustomDialog {
     super.subtitle,
     super.onPrimaryButtonPressed,
     super.onSecondaryButtonPressed,
+    super.onClosedPressed,
     super.title,
     super.primaryButtonText,
     super.secondaryButtonText,
@@ -142,6 +152,7 @@ final class _WarningDialog extends CustomDialog {
     return _SimpleDialog(
       onPrimaryButtonPressed: onPrimaryButtonPressed ?? context.maybePop,
       onSecondaryButtonPressed: onSecondaryButtonPressed,
+      onClosedPressed: onClosedPressed,
       title: title ?? "areYouSure".tr(),
       subtitle: subtitle,
       primaryButtonText: primaryButtonText ?? 'ok'.tr(),
@@ -159,6 +170,7 @@ class _SimpleDialog extends StatelessWidget {
   final _Type type;
   final String? secondaryButtonText;
   final VoidCallback? onSecondaryButtonPressed;
+  final VoidCallback? onClosedPressed;
 
   const _SimpleDialog({
     required this.type,
@@ -168,6 +180,7 @@ class _SimpleDialog extends StatelessWidget {
     required this.onPrimaryButtonPressed,
     this.onSecondaryButtonPressed,
     this.secondaryButtonText,
+    this.onClosedPressed,
   });
 
   @override
@@ -186,7 +199,7 @@ class _SimpleDialog extends StatelessWidget {
             width: context.screenWidth,
             child: Column(
               children: [
-                const _CloseIcon(),
+                _CloseIcon(onPressed: onClosedPressed),
                 SizedBox(height: context.responsive(8.h, sm: 40.h)),
                 _Icon(type: type),
                 SizedBox(height: context.responsive(32.h, sm: 60.h)),
@@ -223,14 +236,16 @@ class _SimpleDialog extends StatelessWidget {
 }
 
 class _CloseIcon extends StatelessWidget {
-  const _CloseIcon();
+  final VoidCallback? onPressed;
+
+  const _CloseIcon({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: IconButton(
-        onPressed: context.maybePop,
+        onPressed: onPressed ?? context.maybePop,
         icon: Icon(
           Icons.close,
           color: darkBlue.withOpacity(.6),

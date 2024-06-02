@@ -1,12 +1,15 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo_app/constants/api_endpoints.dart';
+import 'package:todo_app/constants/failure_message.dart';
+import 'package:todo_app/features/auth/domain/models/user_model.dart';
 import 'package:todo_app/features/auth/domain/repositories/auth_repository.dart';
 
 import '../../../../core/models/failure/failure.dart';
 import '../../../../services/firebase/firebase_service.dart';
 import '../../../../services/locale/locale_resources_service.dart';
 import '../../../../services/network/network_service.dart';
+import '../DTOs/user/user_dto.dart';
 
 @LazySingleton(as: AuthRepository)
 final class AuthRepositoryImpl implements AuthRepository {
@@ -80,5 +83,25 @@ final class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<bool> isRememberMe() async {
     return localeResourcesService.getRememberMe();
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> getUser() async {
+    final id = await localeResourcesService.getUserId();
+
+    final result = await networkService.get(
+      Endpoints.getUser(id.getOrElse(() => "")),
+    );
+
+    return result.fold(
+      left,
+      (r) => optionOf(r.data).fold(
+        () => left(Failure.unknownError(unknownErrorMessage)),
+        (t) => t.extract<List>("users").fold(
+              () => left(Failure.unknownError(unknownErrorMessage)),
+              (t) => right(UserDto.fromJson(t.first as Map<String, dynamic>).toDomain()),
+            ),
+      ),
+    );
   }
 }

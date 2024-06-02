@@ -61,7 +61,7 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<TasksListRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: TasksListPage(statusType: args.statusType),
+        child: WrappedRoute(child: TasksListPage(statusType: args.statusType)),
       );
     },
   };

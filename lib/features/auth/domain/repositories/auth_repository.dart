@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 
 import '../../../../core/models/failure/failure.dart';
+import '../models/user_model.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failure, Unit>> login({
@@ -17,4 +18,6 @@ abstract interface class AuthRepository {
   });
 
   Future<bool> isRememberMe();
+
+  Future<Either<Failure, UserModel>> getUser();
 }

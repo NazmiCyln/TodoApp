@@ -91,8 +91,10 @@ extension GetItInjectableX on _i1.GetIt {
           firebaseService: gh<_i20.FirebaseService>(),
           networkService: gh<_i22.NetworkService>(),
         ));
-    gh.lazySingleton<_i26.HomeRepository>(() =>
-        _i27.HomeRepositoryImpl(networkService: gh<_i22.NetworkService>()));
+    gh.lazySingleton<_i26.HomeRepository>(() => _i27.HomeRepositoryImpl(
+          localeResourcesService: gh<_i3.LocaleResourcesService>(),
+          networkService: gh<_i22.NetworkService>(),
+        ));
     return this;
   }
 }

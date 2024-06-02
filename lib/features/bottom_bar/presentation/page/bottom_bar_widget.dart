@@ -36,7 +36,7 @@ class BottomBarWidget extends ConsumerWidget {
               primaryButtonText: 'tryAgain'.tr(),
               onPrimaryButtonPressed: () {
                 context.router.maybePop();
-                // ref.read(bottomBarProvider.notifier).refresh();
+                ref.read(bottomBarProvider.notifier).refresh();
               },
             ).show(context),
           );
